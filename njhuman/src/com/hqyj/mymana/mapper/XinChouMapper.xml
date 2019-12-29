@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hqyj.mymana.dao.XinChouMapper" >
+  <resultMap id="BaseResultMap" type="com.hqyj.mymana.pojo.XinChou" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="basic_income" property="basicIncome" jdbcType="DOUBLE" />
+    <result column="xj_income" property="xjIncome" jdbcType="DOUBLE" />
+    <result column="award" property="award" jdbcType="DOUBLE" />
+    <result column="fine" property="fine" jdbcType="DOUBLE" />
+    <result column="real_income" property="realIncome" jdbcType="DOUBLE" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, basic_income, xj_income, award, fine, real_income, date,userName
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from xinchou
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from xinchou
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hqyj.mymana.pojo.XinChou" >
+    insert into xinchou (id, basic_income, xj_income, 
+      award, fine, real_income, 
+      date,userName)
+    values (#{id,jdbcType=INTEGER}, #{basicIncome,jdbcType=DOUBLE}, #{xjIncome,jdbcType=DOUBLE}, 
+      #{award,jdbcType=DOUBLE}, #{fine,jdbcType=DOUBLE}, #{realIncome,jdbcType=DOUBLE}, 
+      #{date,jdbcType=DATE},#{userName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hqyj.mymana.pojo.XinChou" >
+    insert into xinchou
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="basicIncome != null" >
+        basic_income,
+      </if>
+      <if test="xjIncome != null" >
+        xj_income,
+      </if>
+      <if test="award != null" >
+        award,
+      </if>
+      <if test="fine != null" >
+        fine,
+      </if>
+      <if test="realIncome != null" >
+        real_income,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="userName != null" >
+        userName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="basicIncome != null" >
+        #{basicIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="xjIncome != null" >
+        #{xjIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="award != null" >
+        #{award,jdbcType=DOUBLE},
+      </if>
+      <if test="fine != null" >
+        #{fine,jdbcType=DOUBLE},
+      </if>
+      <if test="realIncome != null" >
+        #{realIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hqyj.mymana.pojo.XinChou" >
+    update xinchou
+    <set >
+      <if test="basicIncome != null" >
+        basic_income = #{basicIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="xjIncome != null" >
+        xj_income = #{xjIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="award != null" >
+        award = #{award,jdbcType=DOUBLE},
+      </if>
+      <if test="fine != null" >
+        fine = #{fine,jdbcType=DOUBLE},
+      </if>
+      <if test="realIncome != null" >
+        real_income = #{realIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="userName != null" >
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hqyj.mymana.pojo.XinChou" >
+    update xinchou
+    set basic_income = #{basicIncome,jdbcType=DOUBLE},
+      xj_income = #{xjIncome,jdbcType=DOUBLE},
+      award = #{award,jdbcType=DOUBLE},
+      fine = #{fine,jdbcType=DOUBLE},
+      real_income = #{realIncome,jdbcType=DOUBLE},
+      date = #{date,jdbcType=DATE},
+      userName = #{userName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Object">
+    select * from xinchou 
+     <trim prefix="where" suffix=" " suffixOverrides="and" ><!--如果if条件成立，则加上where并且有多个条件时就使用and连接s  -->
+      <if test="userName != null" ><!-- suffix是前面的句子与where之间的空格 -->
+        userName like #{userName} and
+      </if>
+      </trim>
+    limit #{start},#{row}
+  </select>
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+     select count(*) from xinchou 
+     <trim prefix="where" suffix=" " suffixOverrides="and" ><!--如果if条件成立，则加上where并且有多个条件时就使用and连接s  -->
+      <if test="userName != null" ><!-- suffix是前面的句子与where之间的空格 -->
+        userName like #{userName} and
+      </if>
+      </trim>
+  </select>
+</mapper>

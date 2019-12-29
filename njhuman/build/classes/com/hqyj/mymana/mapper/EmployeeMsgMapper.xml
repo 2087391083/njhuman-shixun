@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hqyj.mymana.dao.EmployeeMsgMapper" >
+  <resultMap id="BaseResultMap" type="com.hqyj.mymana.pojo.EmployeeMsg" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="num" property="num" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="tel" property="tel" jdbcType="CHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="CHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="DATE" />
+    <result column="states" property="states" jdbcType="CHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, num, name, sex, birthday, tel, email, education, department, job, time, states, 
+    note
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.hqyj.mymana.pojo.EmployeeMsgKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from employeemsg
+    where id = #{id,jdbcType=INTEGER}
+      and num = #{num,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.hqyj.mymana.pojo.EmployeeMsgKey" >
+    delete from employeemsg
+    where id = #{id,jdbcType=INTEGER}
+  <!--     and num = #{num,jdbcType=VARCHAR} -->
+  </delete>
+  <insert id="insert" parameterType="com.hqyj.mymana.pojo.EmployeeMsg" >
+    insert into employeemsg (id, num, name, 
+      sex, birthday, tel, email, 
+      education, department, job, 
+      time, states, note)
+    values (#{id,jdbcType=INTEGER}, #{num,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, #{tel,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, 
+      #{education,jdbcType=VARCHAR}, #{department,jdbcType=CHAR}, #{job,jdbcType=VARCHAR}, 
+      #{time,jdbcType=DATE}, #{states,jdbcType=CHAR}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hqyj.mymana.pojo.EmployeeMsg" >
+    insert into employeemsg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="states != null" >
+        states,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=CHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=DATE},
+      </if>
+      <if test="states != null" >
+        #{states,jdbcType=CHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hqyj.mymana.pojo.EmployeeMsg" >
+    update employeemsg
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=CHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=DATE},
+      </if>
+      <if test="states != null" >
+        states = #{states,jdbcType=CHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      <!-- and num = #{num,jdbcType=VARCHAR} -->
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hqyj.mymana.pojo.EmployeeMsg" >
+    update employeemsg
+    set num = #{num,jdbcType=VARCHAR},
+    	name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      tel = #{tel,jdbcType=CHAR},
+      email = #{email,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      department = #{department,jdbcType=CHAR},
+      job = #{job,jdbcType=VARCHAR},
+      time = #{time,jdbcType=DATE},
+      states = #{states,jdbcType=CHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+      <!-- and num = #{num,jdbcType=VARCHAR} -->
+  </update>
+  
+  
+  <select id="login" resultType="java.lang.Integer" parameterType="com.hqyj.mymana.pojo.EmployeeMsg">
+  	select count(id) from employeemsg where num=#{num} and name=#{name}
+  </select> <!-- 登录 -->
+  
+  <select id="select" resultMap="BaseResultMap">
+  	select * from employeemsg 
+  	 <trim prefix="where " suffix=" " suffixOverrides="and" ><!-- where后面有个空格，否则会报错 -->
+  		<if test="name != null" >
+        	name like #{name} and
+      	</if>
+  	 </trim>
+  	 limit #{start},#{row}
+  </select><!-- 分页查询和关键字查询 -->
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(*) from employeemsg 
+  	<trim prefix="where " suffix=" " suffixOverrides="and" ><!-- where后面有个空格，否则会报错 -->
+  		<if test="name != null" >
+        	name like #{name} and
+      	</if>
+  	</trim>
+  </select>
+  
+  
+</mapper>

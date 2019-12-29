@@ -1,0 +1,17 @@
+
+	/*设置整个窗体背景的布局*/
+	.imgbody{
+		background: url(../images/login.jpg);/*设置图片背景*/
+		background-repeat: no-repeat;/*设置背景图片不重复*/
+		background-size: 100% 100%;/*设置图片尺寸*/
+		background-attachment:fixed ;/*设置图片定位*/
+	}
+	/*设置登录窗体上面的标题*/
+.myTitle{
+		position: fixed;/*绝对定位*/
+		top: 15%;
+		left: 35%;
+		letter-spacing: 20px;/*字体额间距*/
+		font-family: STCaiyun;/*字体样式*/
+		font-size: 38px;
+	}

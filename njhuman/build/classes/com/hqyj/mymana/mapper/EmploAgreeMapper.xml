@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hqyj.mymana.dao.EmploAgreeMapper" >
+  <resultMap id="BaseResultMap" type="com.hqyj.mymana.pojo.EmploAgree" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fileNumber" property="filenumber" jdbcType="INTEGER" />
+    <result column="employeeNumber" property="employeenumber" jdbcType="INTEGER" />
+    <result column="employeeName" property="employeename" jdbcType="VARCHAR" />
+    <result column="firstDate" property="firstdate" jdbcType="VARCHAR" />
+    <result column="endDate" property="enddate" jdbcType="VARCHAR" />
+    <result column="duty" property="duty" jdbcType="VARCHAR" />
+    <result column="fileContent" property="filecontent" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fileNumber, employeeNumber, employeeName, firstDate, endDate, duty, fileContent, 
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from employee_agreement
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from employee_agreement
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hqyj.mymana.pojo.EmploAgree" >
+    insert into employee_agreement (id, fileNumber, employeeNumber, 
+      employeeName, firstDate, endDate, 
+      duty, fileContent, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{filenumber,jdbcType=INTEGER}, #{employeenumber,jdbcType=INTEGER}, 
+      #{employeename,jdbcType=VARCHAR}, #{firstdate,jdbcType=VARCHAR}, #{enddate,jdbcType=VARCHAR}, 
+      #{duty,jdbcType=VARCHAR}, #{filecontent,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hqyj.mymana.pojo.EmploAgree" >
+    insert into employee_agreement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="filenumber != null" >
+        fileNumber,
+      </if>
+      <if test="employeenumber != null" >
+        employeeNumber,
+      </if>
+      <if test="employeename != null" >
+        employeeName,
+      </if>
+      <if test="firstdate != null" >
+        firstDate,
+      </if>
+      <if test="enddate != null" >
+        endDate,
+      </if>
+      <if test="duty != null" >
+        duty,
+      </if>
+      <if test="filecontent != null" >
+        fileContent,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="filenumber != null" >
+        #{filenumber,jdbcType=INTEGER},
+      </if>
+      <if test="employeenumber != null" >
+        #{employeenumber,jdbcType=INTEGER},
+      </if>
+      <if test="employeename != null" >
+        #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="firstdate != null" >
+        #{firstdate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null" >
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="filecontent != null" >
+        #{filecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hqyj.mymana.pojo.EmploAgree" >
+    update employee_agreement
+    <set >
+      <if test="filenumber != null" >
+        fileNumber = #{filenumber,jdbcType=INTEGER},
+      </if>
+      <if test="employeenumber != null" >
+        employeeNumber = #{employeenumber,jdbcType=INTEGER},
+      </if>
+      <if test="employeename != null" >
+        employeeName = #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="firstdate != null" >
+        firstDate = #{firstdate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        endDate = #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null" >
+        duty = #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="filecontent != null" >
+        fileContent = #{filecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hqyj.mymana.pojo.EmploAgree" >
+    update employee_agreement
+    set fileNumber = #{filenumber,jdbcType=INTEGER},
+      employeeNumber = #{employeenumber,jdbcType=INTEGER},
+      employeeName = #{employeename,jdbcType=VARCHAR},
+      firstDate = #{firstdate,jdbcType=VARCHAR},
+      endDate = #{enddate,jdbcType=VARCHAR},
+      duty = #{duty,jdbcType=VARCHAR},
+      fileContent = #{filecontent,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="select" resultMap="BaseResultMap">
+   select * from employee_agreement
+  <trim prefix="where" suffix=" " suffixOverrides="and">
+  <if test="employeeName != null" >
+        employeeName like #{employeeName} and
+      </if>
+  </trim>
+  LIMIT #{start},#{row}
+  </select>
+  
+  <select  id="selectCount" resultType="java.lang.Integer">
+  select count(*) from employee_agreement 
+  <trim prefix="where" suffix=" " suffixOverrides="and">
+  <if test="employeeName != null" >
+        employeeName like #{employeeName} and
+      </if>
+  </trim>
+  </select>
+</mapper>

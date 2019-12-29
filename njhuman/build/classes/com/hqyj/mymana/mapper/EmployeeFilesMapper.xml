@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hqyj.mymana.dao.EmployeeFilesMapper" >
+  <resultMap id="BaseResultMap" type="com.hqyj.mymana.pojo.EmployeeFiles" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="file_num" property="fileNum" jdbcType="INTEGER" />
+    <result column="employee_num" property="employeeNum" jdbcType="INTEGER" />
+    <result column="files_name" property="filesName" jdbcType="VARCHAR" />
+    <result column="files_suma" property="filesSuma" jdbcType="VARCHAR" />
+    <result column="files_notes" property="filesNotes" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, file_num, employee_num, files_name, files_suma, files_notes
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from employee_files
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from employee_files
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hqyj.mymana.pojo.EmployeeFiles" >
+    insert into employee_files (id, file_num, employee_num, 
+      files_name, files_suma, files_notes
+      )
+    values (#{id,jdbcType=INTEGER}, #{fileNum,jdbcType=INTEGER}, #{employeeNum,jdbcType=INTEGER}, 
+      #{filesName,jdbcType=VARCHAR}, #{filesSuma,jdbcType=VARCHAR}, #{filesNotes,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hqyj.mymana.pojo.EmployeeFiles" >
+    insert into employee_files
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fileNum != null" >
+        file_num,
+      </if>
+      <if test="employeeNum != null" >
+        employee_num,
+      </if>
+      <if test="filesName != null" >
+        files_name,
+      </if>
+      <if test="filesSuma != null" >
+        files_suma,
+      </if>
+      <if test="filesNotes != null" >
+        files_notes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fileNum != null" >
+        #{fileNum,jdbcType=INTEGER},
+      </if>
+      <if test="employeeNum != null" >
+        #{employeeNum,jdbcType=INTEGER},
+      </if>
+      <if test="filesName != null" >
+        #{filesName,jdbcType=VARCHAR},
+      </if>
+      <if test="filesSuma != null" >
+        #{filesSuma,jdbcType=VARCHAR},
+      </if>
+      <if test="filesNotes != null" >
+        #{filesNotes,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hqyj.mymana.pojo.EmployeeFiles" >
+    update employee_files
+    <set >
+      <if test="fileNum != null" >
+        file_num = #{fileNum,jdbcType=INTEGER},
+      </if>
+      <if test="employeeNum != null" >
+        employee_num = #{employeeNum,jdbcType=INTEGER},
+      </if>
+      <if test="filesName != null" >
+        files_name = #{filesName,jdbcType=VARCHAR},
+      </if>
+      <if test="filesSuma != null" >
+        files_suma = #{filesSuma,jdbcType=VARCHAR},
+      </if>
+      <if test="filesNotes != null" >
+        files_notes = #{filesNotes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hqyj.mymana.pojo.EmployeeFiles" >
+    update employee_files
+    set file_num = #{fileNum,jdbcType=INTEGER},
+      employee_num = #{employeeNum,jdbcType=INTEGER},
+      files_name = #{filesName,jdbcType=VARCHAR},
+      files_suma = #{filesSuma,jdbcType=VARCHAR},
+      files_notes = #{filesNotes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectFile" parameterType="java.lang.Object" resultMap="BaseResultMap">
+    
+     
+      select * from employee_files 
+      <trim prefix="where " suffix=" " suffixOverrides="and">
+      
+      <if test="filesName != null" >
+         files_name like  #{filesName} and
+        </if>
+      </trim>
+      
+         LIMIT #{start},#{row}
+    </select>
+     <select id="selectFileCount" resultType="java.lang.Integer">
+      select COUNT(*) from employee_files 
+      
+       <trim prefix="where" suffix=" " suffixOverrides="and">
+      
+      <if test="filesName != null" >
+         files_name like  #{filesName} and
+        </if>
+      </trim>
+      
+    </select> 
+</mapper>

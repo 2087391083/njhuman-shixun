@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hqyj.mymana.dao.TransferMapper" >
+  <resultMap id="BaseResultMap" type="com.hqyj.mymana.pojo.Transfer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="eid" property="eid" jdbcType="INTEGER" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="njob" property="njob" jdbcType="VARCHAR" />
+    <result column="dtime" property="dtime" jdbcType="VARCHAR" />
+    <result column="dcase" property="dcase" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, eid, job, njob, dtime, dcase
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from transfer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from transfer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hqyj.mymana.pojo.Transfer" >
+    insert into transfer (id, eid, job, 
+      njob, dtime, dcase)
+    values (#{id,jdbcType=INTEGER}, #{eid,jdbcType=INTEGER}, #{job,jdbcType=VARCHAR}, 
+      #{njob,jdbcType=VARCHAR}, #{dtime,jdbcType=VARCHAR}, #{dcase,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hqyj.mymana.pojo.Transfer" >
+    insert into transfer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="njob != null" >
+        njob,
+      </if>
+      <if test="dtime != null" >
+        dtime,
+      </if>
+      <if test="dcase != null" >
+        dcase,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="njob != null" >
+        #{njob,jdbcType=VARCHAR},
+      </if>
+      <if test="dtime != null" >
+        #{dtime,jdbcType=VARCHAR},
+      </if>
+      <if test="dcase != null" >
+        #{dcase,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hqyj.mymana.pojo.Transfer" >
+    update transfer
+    <set >
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="njob != null" >
+        njob = #{njob,jdbcType=VARCHAR},
+      </if>
+      <if test="dtime != null" >
+        dtime = #{dtime,jdbcType=VARCHAR},
+      </if>
+      <if test="dcase != null" >
+        dcase = #{dcase,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hqyj.mymana.pojo.Transfer" >
+    update transfer
+    set eid = #{eid,jdbcType=INTEGER},
+      job = #{job,jdbcType=VARCHAR},
+      njob = #{njob,jdbcType=VARCHAR},
+      dtime = #{dtime,jdbcType=VARCHAR},
+      dcase = #{dcase,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="select" resultMap="BaseResultMap">
+  select * from transfer
+  <trim prefix="where" suffix=" " suffixOverrides="and">
+ <if test="job != null" >
+        job like #{job}
+      </if>
+      </trim>
+       limit #{start},#{row}
+  
+  </select>
+  
+   <select id="selectCount" resultType="java.lang.Integer">
+   select count(*) from transfer
+   <trim prefix="where" suffix=" " suffixOverrides="and">
+ <if test="job != null" >
+        job like #{job}
+      </if>
+      </trim>
+      
+  
+   </select>
+  
+</mapper>
